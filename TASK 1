@@ -1,0 +1,39 @@
+TASK 1: NUMBER GAME
+CODE:
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class NumberGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int minRange = 1, maxRange = 100, maxAttempts = 5, rounds = 0, totalAttempts = 0;
+
+        System.out.println("Welcome to the Number Game!");
+
+        do {
+            int targetNumber = random.nextInt(maxRange - minRange + 1) + minRange, attempts = 0;
+
+            System.out.println("\nRound " + (++rounds) + ": Guess between " + minRange + " and " + maxRange);
+
+            while (attempts++ < maxAttempts) {
+                System.out.print("Enter guess: ");
+                int userGuess = scanner.nextInt();
+
+                if (userGuess == targetNumber) {
+                    System.out.println("Congratulations! You guessed it in " + attempts + " attempts.");
+                    totalAttempts += attempts;
+                    break;
+                } else if (userGuess < targetNumber)
+                    System.out.println("Too low! Try again.");
+                else
+                    System.out.println("Too high! Try again.");
+            }
+
+            System.out.print("Do you want to play another round? (yes/no): ");
+        } while (scanner.next().equalsIgnoreCase("yes"));
+
+        System.out.println("Thanks for playing! Your average attempts: " + (totalAttempts / rounds));
+    }
+}
